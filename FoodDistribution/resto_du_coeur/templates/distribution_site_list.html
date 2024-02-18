@@ -1,0 +1,30 @@
+<!-- distribution_site_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Liste des sites de distribution</h1>
+  <ul>
+    {% for distribution_site in distribution_sites %}
+      <li>{{ distribution_site.name }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+<!-- <h1>Liste des sites de distribution</h1>
+<ul>
+  {% for site in object_list %}
+    <li>{{ site.name }}</li>
+  {% empty %}
+    <li>Aucun site de distribution disponible</li>
+  {% endfor %}
+</ul>
+
+<h1>Ajouter un nouveau site de distribution</h1>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Ajouter</button>
+</form> -->
+
+
