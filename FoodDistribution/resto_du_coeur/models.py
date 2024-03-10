@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.fields.related import ForeignKey
 
-from FoodDistribution.authentification_app.models import DistributionSite
+from authentification_app.models import DistributionSite
 
 class Category(models.Model):
     name = models.CharField(max_length=200)

@@ -1,63 +1,32 @@
 from django.shortcuts import redirect, render
 from .models import *
+from django.core.paginator import Paginator
 
 # Create your views here.
 
-# def index(request):
-#     return render(request, 'index.html')
-
-    
-# from django.views.generic import ListView, DetailView
-# from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# from .models import Category, DistributionSite, Product, Order, OrderItem
-# from .serializers import CategorySerializer, DistributionSiteSerializer, ProductSerializer, OrderSerializer, OrderItemSerializer
-
-# class CategoryListView(ListView):
-#     model = Category
-
-# class CategoryCreateView(CreateView):
-#     model = Category
-#     fields = '__all__'
-
-# class CategoryUpdateView(UpdateView):
-#     model = Category
-#     fields = '__all__'
-
-# class CategoryDeleteView(DeleteView):
-#     model = Category
-
-# class CategoryDetailView(DetailView):
-#     model = Category
-
-# class DistributionSiteListView(ListView):
-#     model = DistributionSite
-
-# class DistributionSiteCreateView(CreateView):
-#     model = DistributionSite
-#     fields = '__all__'
-
-# class DistributionSiteUpdateView(UpdateView):
-#     model = DistributionSite
-#     fields = '__all__'
-
-# class DistributionSiteDeleteView(DeleteView):
-#     model = DistributionSite
-
-# class DistributionSiteDetailView(DetailView):
-#     model = DistributionSite
-
-
-
-
-
-
-
-
-
-
-
-from django.shortcuts import render
 from django.views import View
+
+#home
+def index(request):
+    product_object = Product.objects.all()
+    categories = Category.objects.all()
+    item_name = request.GET.get('item')
+    if item_name !='' and item_name is not None:
+        product_object = Product.objects.filter(name__icontains=item_name)
+    paginator = Paginator(product_object, 6)
+    page = request.GET.get('page')
+    product_object = paginator.get_page(page)
+    return render(request, 'index.html', {'produits': product_object, 'categories':categories})
+
+#detail
+def detail(request, myid):
+    product_object = Product.objects.get(id=myid)
+    return render(request, 'detail.html', {'product': product_object})    
+
+
+
+
+
 
 class HomeView(View):
     def get(self, request):
