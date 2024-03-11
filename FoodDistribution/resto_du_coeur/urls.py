@@ -18,13 +18,16 @@ from .views import (
     DistributionSiteListView,
     detail,
     index,
+    checkout,
  
 )
 
 urlpatterns = [
     path('', index, name='index'), # Vue d'accueil
     path('detail/<int:myid>/', detail, name='detail'), # Vue de détail
-    path('home', HomeView.as_view(), name='index'),
+    path('home', checkout, name='checkout'),
+    path('checkout', HomeView.as_view(), name='index'),
+
     path('categories/', CategoryListView.as_view(), name='category-list'),
     path('categories/create/', CategoryCreateView.as_view(), name='category-create'),
     path('categories/update/<int:pk>/', CategoryUpdateView.as_view(), name='category-update'),
@@ -32,5 +35,5 @@ urlpatterns = [
     path('categories/<int:pk>/', CategoryDetailView.as_view(), name='category-detail'),
     path('sites/', DistributionSiteListView.as_view(), name='site-list'),
    
-  
+ 
 ]

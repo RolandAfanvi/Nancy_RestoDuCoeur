@@ -13,7 +13,7 @@ def index(request):
     item_name = request.GET.get('item')
     if item_name !='' and item_name is not None:
         product_object = Product.objects.filter(name__icontains=item_name)
-    paginator = Paginator(product_object, 6)
+    paginator = Paginator(product_object, 8)
     page = request.GET.get('page')
     product_object = paginator.get_page(page)
     return render(request, 'index.html', {'produits': product_object, 'categories':categories})
@@ -24,8 +24,8 @@ def detail(request, myid):
     return render(request, 'detail.html', {'product': product_object})    
 
 
-
-
+def checkout(request):
+    return render(request, 'checkout.html')
 
 
 class HomeView(View):
